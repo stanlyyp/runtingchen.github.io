@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Runting Chen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* 导航栏 */
+        nav {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-size: 1rem;
+            transition: color 0.3s;
+            font-weight: 400;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #10b981;
+        }
+
+        /* Hero 区域 */
+        .hero {
+            background: linear-gradient(135deg, rgba(200, 210, 220, 0.3) 0%, rgba(220, 225, 235, 0.5) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%2390a4ae" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            padding: 8rem 2rem 12rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="%23cccccc" opacity="0.3"/><circle cx="50" cy="30" r="1" fill="%23cccccc" opacity="0.3"/><circle cx="80" cy="60" r="1" fill="%23cccccc" opacity="0.3"/><circle cx="30" cy="80" r="1" fill="%23cccccc" opacity="0.3"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chinese-name {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.5rem;
+        }
+
+        .english-name {
+            font-size: 3rem;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        /* 主内容区 */
+        .main-container {
+            max-width: 1200px;
+            margin: -6rem auto 0;
+            padding: 0 2rem 4rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: #6b7280;
+        }
+
+        p {
+            color: #4b5563;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        /* 教育列表 */
+        .education-item {
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid #10b981;
+        }
+
+        .education-item h3 {
+            font-size: 1.1rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item .degree {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .education-item .year {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* 社交图标 */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: #10b981;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* 响应式 */
+        @media (max-width: 968px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                margin-top: 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero {
+                padding: 4rem 1rem 8rem;
+            }
+
+            .chinese-name {
+                font-size: 2rem;
+                letter-spacing: 0.3rem;
+            }
+
+            .english-name {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .content-section, .sidebar {
+                padding: 1.5rem;
+            }
+
+            .chinese-name {
+                font-size: 1.5rem;
+            }
+
+            .english-name {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="#10b981"/>
+                    <path d="M35 65 L45 45 L55 65 M40 55 L50 55" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <circle cx="50" cy="35" r="5" fill="white"/>
+                </svg>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="https://www.baidu.com" target="_blank">Blog</a></li>
+                <li><a href="https://www.google.com" target="_blank">Publications</a></li>
+                <li><a href="https://scholar.google.com" target="_blank">Categories</a></li>
+                <li><a href="https://github.com/runtingchen" target="_blank">Search</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="chinese-name">陈润庭</h1>
+            <h2 class="english-name">Runting Chen</h2>
+            <p class="subtitle">Research Assistant, Sun Yat-sen University</p>
+        </div>
+    </section>
+
+    <!-- 主内容区 -->
+    <div class="main-container">
+        <!-- 左侧主内容 -->
+        <div class="content-section">
+            <h1>Home</h1>
+            
+            <p>
+                Runting Chen, a Research Assistant at Sun Yat-sen University, works on 
+                reservoir operation and machine learning. Currently, the research focuses on 
+                <span class="highlight">intelligent reservoir scheduling</span> and 
+                <span class="highlight">hydrological forecasting using machine learning</span>.
+            </p>
+
+            <h2>Education</h2>
+            
+            <div class="education-item">
+                <h3>Sun Yat-sen University</h3>
+                <p class="degree">M.S. in Physical Geography</p>
+                <p class="year">Graduated June 2025</p>
+            </div>
+
+            <div class="education-item">
+                <h3>Sun Yat-sen University</h3>
+                <p class="degree">B.S. in Geographic Information Science</p>
+                <p class="year">2021 - 2025</p>
+            </div>
+
+            <h2>Research Interests</h2>
+            <ul style="color: #4b5563; margin-left: 2rem;">
+                <li>Reservoir Operation and Scheduling</li>
+                <li>Machine Learning in Hydrology</li>
+                <li>Water Resources Management</li>
+                <li>Hydrological Forecasting</li>
+                <li>Deep Learning Applications</li>
+            </ul>
+        </div>
+
+        <!-- 右侧边栏 -->
+        <div class="sidebar">
+            <h2>About this site</h2>
+            <p style="color: #6b7280;">
+                Share something interesting that I think.
+            </p>
+            
+            <div class="social-links">
+                <a href="https://github.com/runtingchen" class="social-link" title="GitHub" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="mailto:chenrt@mail2.sysu.edu.cn" class="social-link" title="Email">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </a>
+                <a href="https://www.researchgate.net/profile/Runting-Chen-3" class="social-link" title="ResearchGate" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.727c-.01.282-.013.621-.013 1.016a31.121 31.121 0 0 0 .014 1.017 9 9 0 0 0 .05.727 7.946 7.946 0 0 0 .077.53h-.005a3.334 3.334 0 0 0 .113.438c.245.743.65 1.303 1.214 1.68.564.376 1.256.564 2.075.564.8 0 1.536-.213 2.105-.603.57-.39.94-.916 1.175-1.65.076-.235.135-.558.177-.93a10.9 10.9 0 0 0 .043-1.207v-.82c0-.095-.047-.142-.14-.142h-3.064c-.094 0-.14.047-.14.141v.956c0 .094.046.14.14.14h1.666c.056 0 .084.028.084.086 0 .36-.063.672-.196.95-.184.397-.52.69-.997.87-.25.093-.547.14-.89.14-.346 0-.64-.047-.877-.14-.475-.18-.83-.48-1.012-.89a2.637 2.637 0 0 1-.196-.95 6.811 6.811 0 0 1-.084-1.032v-.82c0-.282.014-.576.043-.882a4.14 4.14 0 0 1 .196-.95c.183-.395.52-.69.997-.87.237-.094.53-.141.877-.141.347 0 .64.047.89.14.48.184.83.48 1.013.87a2.19 2.19 0 0 1 .14.478c.028.18.042.38.042.6v.48c0 .094.046.14.14.14h1.062c.094 0 .14-.046.14-.14v-.48c0-.36-.028-.695-.084-.997a3.624 3.624 0 0 0-.196-.78c-.183-.395-.52-.69-.997-.87-.477-.18-1.043-.27-1.694-.27zM6.501 8.941c-.094 0-.14.047-.14.14v8.295c0 .094.046.14.14.14h1.007c.094 0 .14-.046.14-.14V8.941h-1.007zm7.24 0c-.094 0-.14.047-.14.14v3.653c0 .282-.014.576-.043.882a4.14 4.14 0 0 1-.196.95c-.184.395-.52.69-.997.87-.237.094-.53.141-.877.141-.347 0-.64-.047-.89-.14-.477-.184-.83-.48-1.013-.87a2.637 2.637 0 0 1-.196-.95 6.811 6.811 0 0 1-.084-1.032v-3.504c0-.094-.047-.14-.14-.14H8.157c-.094 0-.14.046-.14.14v3.504c0 .282.014.576.043.882.028.304.098.627.196.95.183.395.52.69.997.87.25.093.547.14.89.14.346 0 .64-.047.877-.14.475-.18.83-.48 1.012-.87.098-.325.168-.646.196-.95.03-.306.043-.6.043-.882V9.081c0-.094-.047-.14-.14-.14h-1.007z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
